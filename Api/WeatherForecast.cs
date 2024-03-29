@@ -1,4 +1,4 @@
-namespace bookingRestaurants
+namespace Api
 {
     public class WeatherForecast
     {
