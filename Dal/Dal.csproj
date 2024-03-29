@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Category\Interfaces\" />
+    <Folder Include="Menu\Interfaces\" />
+    <Folder Include="DishItem\Interfaces\" />
+    <Folder Include="EF\" />
+    <Folder Include="Photo\Interfaces\" />
     <Folder Include="Restaurant\Interfaces\" />
-    <Folder Include="Restaurant\Models\" />
   </ItemGroup>
 
 </Project>
