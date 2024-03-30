@@ -1,8 +1,10 @@
 ﻿using Dal.EF;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("/restaurant")]
     public class RestaurantController : Controller
     {
