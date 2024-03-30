@@ -10,9 +10,12 @@
     <Folder Include="Category\Interfaces\" />
     <Folder Include="Menu\Interfaces\" />
     <Folder Include="DishItem\Interfaces\" />
-    <Folder Include="EF\" />
     <Folder Include="Photo\Interfaces\" />
     <Folder Include="Restaurant\Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
