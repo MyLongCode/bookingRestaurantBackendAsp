@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dal.Role.Models;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Dal.User.Models
 {
-    public class RoleDal
+    public class UserDal 
     {
         public int Id { get; set; }
         public string Email { get; set; }
