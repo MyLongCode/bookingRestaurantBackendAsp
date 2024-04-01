@@ -1,4 +1,5 @@
-﻿using Dal.Menu.Models;
+﻿using Dal.EF;
+using Dal.Menu.Models;
 using Dal.Photo.Models;
 using Dal.Restaurant.Interfaces;
 using Dal.Restaurant.Models;
@@ -12,19 +13,35 @@ namespace Dal.Restaurant
 {
     public class RestaurantRepository : IRestaurantRepository
     {
-        public Task<int> CreateRestaurant(RestaurantDal restaurant)
+        private ApplicationDbContext db;
+
+        public RestaurantRepository(ApplicationDbContext context) => this.db = context;
+        public Task CreateRestaurant(RestaurantDal restaurant)
         {
-            throw new NotImplementedException();
+            db.Restaurants.AddAsync(restaurant);
+            return Task.CompletedTask;
         }
 
         public Task DeleteRestaurantById(int restaurantId)
         {
-            throw new NotImplementedException();
+            RestaurantDal restaurant = db.Restaurants.Find(restaurantId);
+            if (restaurant == null)
+                throw new Exception("restaurant undefined");
+            db.Restaurants.Remove(restaurant);
+            return Task.CompletedTask;
+        }
+
+        public async Task<IEnumerable<RestaurantDal>> GetAllRestaurants()
+        {
+            return db.Restaurants.ToList();
         }
 
         public Task<RestaurantDal> GetRestaurantInfo(int restaurantId)
         {
-            throw new NotImplementedException();
+            RestaurantDal restaurant = db.Restaurants.Find(restaurantId);
+            if (restaurant == null)
+                throw new Exception("restaurant undefined");
+            return Task.FromResult(restaurant);
         }
 
         public Task<MenuDal[]> GetRestaurantMenuById(int restaurantId)

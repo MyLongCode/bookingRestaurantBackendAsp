@@ -13,11 +13,15 @@ namespace Dal.Restaurant.Interfaces
     public interface IRestaurantRepository
     {
         /// <summary>
+        /// Получить все рестораны
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<RestaurantDal>> GetAllRestaurants();
+        /// <summary>
         /// Создание нового ресторана
         /// </summary>
         /// <param name="restaurant"></param>
-        /// <returns>ID созданного ресторана</returns>
-        Task<int> CreateRestaurant(RestaurantDal restaurant);
+        Task CreateRestaurant(RestaurantDal restaurant);
         /// <summary>
         /// Получить название ресторана по ID
         /// </summary>

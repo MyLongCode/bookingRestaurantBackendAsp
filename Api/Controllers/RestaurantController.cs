@@ -11,5 +11,9 @@ namespace Api.Controllers
 
         public RestaurantController(ApplicationDbContext db) => this.db = db;
 
+        public IActionResult Index()
+        {
+            return Ok();
+        }
     }
 }
