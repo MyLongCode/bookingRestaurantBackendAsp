@@ -20,10 +20,7 @@ namespace Api.Controllers
 
         public UserController(ApplicationDbContext db) => this.db = db;
 
-        public IActionResult Index()
-        {
-            return Ok("пацаны бэк 500 вернул");
-        }
+
         [HttpPost]
         public IActionResult Login(UserDal userData)
         {
