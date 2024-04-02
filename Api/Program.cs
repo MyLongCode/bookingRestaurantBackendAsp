@@ -1,9 +1,10 @@
 using Dal.EF;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
+using Logic;
+using Dal;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Protocol.Core.Types;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,29 +17,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            // указывает, будет ли валидироваться издатель при валидации токена
-            ValidateIssuer = true,
-            // строка, представляющая издателя
-            ValidIssuer = "mylongcode",
-            // будет ли валидироваться потребитель токена
-            ValidateAudience = true,
-            // установка потребителя токена
-            ValidAudience = "dotnetclient",
-            // будет ли валидироваться время существования
-            ValidateLifetime = true,
-            // установка ключа безопасности
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                              .GetBytes("mylongcode")),
-            // валидация ключа безопасности
-            ValidateIssuerSigningKey = true,
-        };
-    });
+
+builder.Services.TryAddLogic();
+builder.Services.TryAddDal();
+
 var app = builder.Build();
 app.UseHttpsRedirection();
 

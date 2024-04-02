@@ -1,19 +1,23 @@
-﻿using Dal.EF;
+﻿using Logic.Restaurant.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 
 namespace Api.Controllers
 {
     [Route("/restaurant")]
     public class RestaurantController : Controller
     {
-        ApplicationDbContext db;
+        private readonly IRestaurantLogicManager _restaurantLogicManager;
 
-        public RestaurantController(ApplicationDbContext db) => this.db = db;
+        public RestaurantController(IRestaurantLogicManager restaurantLogicManager)
+        {
+            _restaurantLogicManager = restaurantLogicManager;
+        }
 
         public IActionResult Index()
         {
-            return Ok();
+            return Ok(_restaurantLogicManager.GetRestaurantInfo(1));
         }
     }
 }
