@@ -47,7 +47,17 @@ namespace Logic.Restaurant
         public async Task<IEnumerable<RestaurantLogic>> GetAllRestaurants()
         {
             var result = await _restaurantRepository.GetAllRestaurants();
-            return (IEnumerable<RestaurantLogic>)result;
+            return result.Select(a => new RestaurantLogic()
+            {
+                Name = a.Name,
+                Address = a.Address,
+                OwnerId = a.OwnerId,
+                Description = a.Description,
+                Schedule = a.Schedule,
+                CapacityOnTable = a.CapacityOnTable,
+                Logo = a.Logo,
+                Preview = a.Preview
+            });
         }
 
         public async Task<RestaurantLogic> GetRestaurantInfo(int restaurantId)
@@ -68,7 +78,7 @@ namespace Logic.Restaurant
 
         public Task<string> GetRestaurantName(int restaurantId)
         {
-            throw new NotImplementedException();
+            return _restaurantRepository.GetRestaurantName(restaurantId);
         }
     }
 }

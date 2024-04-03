@@ -51,7 +51,10 @@ namespace Dal.Restaurant
 
         public Task<string> GetRestaurantName(int restaurantId)
         {
-            throw new NotImplementedException();
+            RestaurantDal restaurant = db.Restaurants.Find(restaurantId);
+            if (restaurant == null)
+                throw new Exception("restaurant undefined");
+            return Task.FromResult(restaurant.Name);
         }
 
         public Task<PhotoDal[]> GetRestaurantPhotoById(int restaurantId)
