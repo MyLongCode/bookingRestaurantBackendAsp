@@ -17,21 +17,10 @@ namespace Dal.Restaurant
         private ApplicationDbContext db;
 
         public RestaurantRepository(ApplicationDbContext context) => this.db = context;
-        public async Task<Guid> CreateRestaurant(RestaurantDal restaurant)
+        public async Task CreateRestaurant(RestaurantDal restaurant)
         {
-            if (restaurant.Id == Guid.Empty)
-            {
-                restaurant = restaurant with { Id = Guid.NewGuid() };
-            }
-
             db.Restaurants.Add(restaurant);
-            var res = db.Restaurants.FirstOrDefault(a => a.Id == restaurant.Id);
-            if (res != null)
-            {
-                return res.Id;
-            }
-
-            throw new Exception("Ошибка добавления пользователя");
+            db.SaveChanges();
         }
 
         public Task DeleteRestaurantById(int restaurantId)

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Dal.Restaurant.Models
 {
-    public record RestaurantDal : BaseEntityDal<Guid>
+    public record RestaurantDal
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int OwnerId { get; set; }
