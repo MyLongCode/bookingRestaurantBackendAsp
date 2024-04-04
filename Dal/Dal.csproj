@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Category\Interfaces\" />
-    <Folder Include="Menu\Interfaces\" />
     <Folder Include="DishItem\Interfaces\" />
     <Folder Include="Photo\Interfaces\" />
     <Folder Include="Restaurant\Interfaces\" />
