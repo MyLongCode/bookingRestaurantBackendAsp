@@ -4,13 +4,13 @@ namespace Api.Controllers.Restaurant.Requests
 {
     public record CreateRestaurantRequest
     {
-        public string Name;
-        public string Address;
-        public int OwnerId;
-        public string Description;
-        public string Schedule;
-        public int CapacityOnTable;
-        public string Logo;
-        public string Preview;
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public int OwnerId { get; set; }
+        public string Description { get; set; }
+        public string Schedule { get; set; }
+        public int CapacityOnTable { get; set; }
+        public string Logo { get; set; }
+        public string Preview { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Dal.Restaurant
 {
@@ -16,10 +17,21 @@ namespace Dal.Restaurant
         private ApplicationDbContext db;
 
         public RestaurantRepository(ApplicationDbContext context) => this.db = context;
-        public Task CreateRestaurant(RestaurantDal restaurant)
+        public async Task<Guid> CreateRestaurant(RestaurantDal restaurant)
         {
-            db.Restaurants.AddAsync(restaurant);
-            return Task.CompletedTask;
+            if (restaurant.Id == Guid.Empty)
+            {
+                restaurant = restaurant with { Id = Guid.NewGuid() };
+            }
+
+            db.Restaurants.Add(restaurant);
+            var res = db.Restaurants.FirstOrDefault(a => a.Id == restaurant.Id);
+            if (res != null)
+            {
+                return res.Id;
+            }
+
+            throw new Exception("Ошибка добавления пользователя");
         }
 
         public Task DeleteRestaurantById(int restaurantId)

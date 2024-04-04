@@ -34,7 +34,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("/restaurant")]
-        public IActionResult CreateRestaurant([FromBody] CreateRestaurantRequest dto)
+        public IActionResult CreateRestaurant(CreateRestaurantRequest dto)
         {
             var res = _restaurantLogicManager.CreateRestaurant(new RestaurantLogic
             {

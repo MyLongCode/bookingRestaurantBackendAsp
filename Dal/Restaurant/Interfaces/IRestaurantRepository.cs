@@ -21,7 +21,7 @@ namespace Dal.Restaurant.Interfaces
         /// Создание нового ресторана
         /// </summary>
         /// <param name="restaurant"></param>
-        Task CreateRestaurant(RestaurantDal restaurant);
+        Task<Guid> CreateRestaurant(RestaurantDal restaurant);
         /// <summary>
         /// Получить название ресторана по ID
         /// </summary>

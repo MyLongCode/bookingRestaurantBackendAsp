@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dal.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Dal.Restaurant.Models
 {
-    public class RestaurantDal
+    public record RestaurantDal : BaseEntityDal<Guid>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int OwnerId { get; set; }
