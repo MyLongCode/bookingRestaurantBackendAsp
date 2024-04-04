@@ -1,5 +1,7 @@
 ﻿using Logic.Restaurant;
 using Logic.Restaurant.Interfaces;
+using Logic.Menu;
+using Logic.Menu.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -15,6 +17,7 @@ namespace Logic
         public static IServiceCollection TryAddLogic(this IServiceCollection serviceCollection)
         {
             serviceCollection.TryAddScoped<IRestaurantLogicManager, RestaurantLogicManager>();
+            serviceCollection.TryAddScoped<IMenuLogicManager, MenuLogicManager>();
             return serviceCollection;
         }
     }

@@ -10,5 +10,6 @@ namespace Logic.Menu.Models
     public class MenuLogic
     {
         public string Name { get; set; }
+        public int RestaurantId { get; set; }
     }
 }

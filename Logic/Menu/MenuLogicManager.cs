@@ -1,41 +1,49 @@
-﻿using Dal.EF;
+﻿
 using Dal.Menu.Interfaces;
 using Dal.Menu.Models;
-using Dal.Restaurant.Models;
+using Logic.Menu.Interfaces;
+using Logic.Menu.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.Menu
+namespace Logic.Menu
 {
     public class MenuLogicManager : IMenuLogicManager
     {
-        private ApplicationDbContext db;
-        public MenuLogicManager(ApplicationDbContext context) => this.db = context;
+        private readonly IMenuRepository _menuRepository;
 
-        public async Task CreateMenu(MenuDal menu)
+        public MenuLogicManager(IMenuRepository menuRepository) => _menuRepository = menuRepository;
+
+        public Task CreateMenu(MenuLogic menu)
         {
-            db.Menus.Add(menu);
-            db.SaveChanges();
+            _menuRepository.CreateMenu(new MenuDal
+            {
+                Name = menu.Name,
+                RestaurantId = menu.RestaurantId,
+            });
+            return Task.CompletedTask;
         }
 
         public Task DeleteMenu(int menuId)
         {
-            MenuDal menu = db.Menus.Find(menuId);
-            if (menu == null)
-                throw new Exception("menu undefined");
-            db.Menus.Remove(menu);
+            _menuRepository.DeleteMenu(menuId);
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<MenuDal>> GetAllMenusByRestaurantId(int restaurantId)
+        public async Task<IEnumerable<MenuLogic>> GetAllMenusByRestaurantId(int restaurantId)
         {
-            return db.Menus.Where(m => m.RestaurantId == restaurantId).ToList();
+            var res = await _menuRepository.GetAllMenusByRestaurantId(restaurantId);
+            return res.Select(m => new MenuLogic()
+            {
+                Name = m.Name,
+                RestaurantId=m.RestaurantId,
+            });
         }
 
-        public Task PatchMenu(MenuDal menu)
+        public Task PatchMenu(MenuLogic menu)
         {
             throw new NotImplementedException();
         }
