@@ -15,19 +15,24 @@ namespace Dal.Category
         private ApplicationDbContext db;
         public CategoryRepository(ApplicationDbContext context) => this.db = context;
 
-        public Task CreateCategory(CategoryDal category)
+        public async Task CreateCategory(CategoryDal category)
         {
-            throw new NotImplementedException();
+            db.Add(category);
+            db.SaveChanges();
         }
 
         public Task DeleteCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            CategoryDal category = db.Categories.Find(categoryId);
+            if (category == null)
+                throw new Exception("Category undefined");
+            db.Categories.Remove(category);
+            return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<CategoryDal>> GetAllCategoriesByMenuId(int menuId)
+        public async Task<IEnumerable<CategoryDal>> GetAllCategoriesByMenuId(int menuId)
         {
-            throw new NotImplementedException();
+            return db.Categories.Where(m => m.MenuId == menuId).ToList();
         }
 
         public Task PatchCategory(CategoryDal category)
