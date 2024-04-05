@@ -13,6 +13,10 @@ namespace Api.Controllers.Restaurant.Responses
         public int CapacityOnTable { get; set; }
         public string Logo { get; set; }
         public string Preview { get; set; }
-        public MenuLogic[] Menus { get; set; }
+        public MenuDto[] Menus { get; set; }
+    }
+    public record MenuDto
+    {
+        public string Name { get; set; }
     }
 }

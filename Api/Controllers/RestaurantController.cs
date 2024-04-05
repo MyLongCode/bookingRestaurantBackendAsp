@@ -48,7 +48,10 @@ namespace Api.Controllers
                 CapacityOnTable = restaurant.CapacityOnTable,
                 Logo = restaurant.Logo,
                 Preview = restaurant.Preview,
-                Menus = menus.ToArray(),
+                Menus = menus.Select(m => new MenuDto
+                {
+                    Name = m.Name
+                }).ToArray(),
             });
         }
 
