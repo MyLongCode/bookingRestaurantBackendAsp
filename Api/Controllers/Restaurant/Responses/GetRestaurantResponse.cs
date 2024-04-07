@@ -18,5 +18,11 @@ namespace Api.Controllers.Restaurant.Responses
     public record MenuDto
     {
         public string Name { get; set; }
+        public CategoryDto[] Categories { get; set; }
+    }
+    public record CategoryDto
+    {
+        public string Name { get; set; }
+        public string Photo { get; set; }
     }
 }

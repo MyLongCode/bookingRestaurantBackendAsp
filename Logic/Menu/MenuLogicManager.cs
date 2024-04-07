@@ -38,6 +38,7 @@ namespace Logic.Menu
             var res = await _menuRepository.GetAllMenusByRestaurantId(restaurantId);
             return res.Select(m => new MenuLogic()
             {
+                Id = m.Id,
                 Name = m.Name,
                 RestaurantId=m.RestaurantId,
             });

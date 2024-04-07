@@ -1,6 +1,7 @@
 ﻿using Api.Controllers.Restaurant.Requests;
 using Api.Controllers.Restaurant.Responses;
 using Humanizer;
+using Logic.Category.Interfaces;
 using Logic.Menu.Interfaces;
 using Logic.Restaurant.Interfaces;
 using Logic.Restaurant.Models;
@@ -15,12 +16,14 @@ namespace Api.Controllers
     {
         private readonly IRestaurantLogicManager _restaurantLogicManager;
         private readonly IMenuLogicManager _menuLogicManager;
+        private readonly ICategoryLogicManager _categoryLogicManager;
 
         public RestaurantController(IRestaurantLogicManager restaurantLogicManager,
-            IMenuLogicManager menuLogicManager)
+            IMenuLogicManager menuLogicManager, ICategoryLogicManager categoryLogicManager)
         {
             _restaurantLogicManager = restaurantLogicManager;
             _menuLogicManager = menuLogicManager;
+            _categoryLogicManager = categoryLogicManager;
         }
 
         [HttpGet]
@@ -50,7 +53,14 @@ namespace Api.Controllers
                 Preview = restaurant.Preview,
                 Menus = menus.Select(m => new MenuDto
                 {
-                    Name = m.Name
+                    Name = m.Name,
+                    Categories = _categoryLogicManager.GetAllCategoriesByMenuId(m.Id)
+                    .Result
+                    .Select(c => new CategoryDto()
+                    {
+                        Name = c.Name,
+                        Photo = c.Photo
+                    }).ToArray()
                 }).ToArray(),
             });
         }
