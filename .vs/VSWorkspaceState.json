@@ -3,9 +3,13 @@
     "",
     "\\IdentityService",
     "\\IdentityService\\IdentityService",
+    "\\IdentityService\\IdentityService\\Api",
+    "\\IdentityService\\IdentityService\\Api\\Controllers",
+    "\\IdentityService\\IdentityService\\Api\\Models",
     "\\RestaurantService",
-    "\\RestaurantService\\Api"
+    "\\RestaurantService\\Api",
+    "\\RestaurantService\\Api\\Controllers"
   ],
-  "SelectedNode": "\\IdentityService\\IdentityService\\IdentityService.sln",
+  "SelectedNode": "\\RestaurantService\\RestaurantService.sln",
   "PreviewInSolutionExplorer": false
 }

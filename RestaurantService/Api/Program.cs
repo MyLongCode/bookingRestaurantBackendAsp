@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using NuGet.Protocol.Core.Types;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +23,38 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.TryAddLogic();
 builder.Services.TryAddDal();
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            // укзывает, будет ли валидироваться издатель при валидации токена
+                            ValidateIssuer = true,
+                            // строка, представляющая издателя
+                            ValidIssuer = AuthOptions.ISSUER,
+
+                            // будет ли валидироваться потребитель токена
+                            ValidateAudience = true,
+                            // установка потребителя токена
+                            ValidAudience = AuthOptions.AUDIENCE,
+                            // будет ли валидироваться время существования
+                            ValidateLifetime = true,
+
+                            // установка ключа безопасности
+                            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                            // валидация ключа безопасности
+                            ValidateIssuerSigningKey = true,
+                        };
+                    });
+
 var app = builder.Build();
 app.UseHttpsRedirection();
 
+
+
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 

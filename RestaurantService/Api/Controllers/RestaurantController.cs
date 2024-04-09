@@ -11,6 +11,7 @@ using NuGet.Protocol;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("/restaurant")]
     public class RestaurantController : Controller
     {
