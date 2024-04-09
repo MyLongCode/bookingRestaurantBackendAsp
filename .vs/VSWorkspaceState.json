@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\IdentityService",
+    "\\IdentityService\\IdentityService",
     "\\RestaurantService",
     "\\RestaurantService\\Api"
   ],
-  "SelectedNode": "\\RestaurantService\\Api\\Api.csproj",
+  "SelectedNode": "\\IdentityService\\IdentityService\\IdentityService.sln",
   "PreviewInSolutionExplorer": false
 }
