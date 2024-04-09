@@ -1,16 +1,8 @@
-﻿using Dal.EF;
-using Dal.Menu.Models;
-using Dal.Photo.Models;
+﻿
 using Dal.Restaurant.Interfaces;
 using Dal.Restaurant.Models;
-using Dal.User.Models;
 using Logic.Restaurant.Interfaces;
 using Logic.Restaurant.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic.Restaurant
 {
