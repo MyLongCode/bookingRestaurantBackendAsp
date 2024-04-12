@@ -10,7 +10,7 @@ namespace Logic.Category.Models
     public class CategoryLogic
     {
         public string Name { get; set; }
-        public string Photo { get; set; }
+        public byte[] Photo { get; set; }
         public int MenuId { get; set; }
     }
 }

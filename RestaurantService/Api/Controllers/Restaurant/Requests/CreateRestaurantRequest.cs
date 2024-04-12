@@ -10,7 +10,7 @@ namespace Api.Controllers.Restaurant.Requests
         public string Description { get; set; }
         public string Schedule { get; set; }
         public int CapacityOnTable { get; set; }
-        public string Logo { get; set; }
-        public string Preview { get; set; }
+        public byte[] Logo { get; set; }
+        public byte[] Preview { get; set; }
     }
 }
