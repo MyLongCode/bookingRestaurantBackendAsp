@@ -48,6 +48,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         };
                     });
 
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 app.UseHttpsRedirection();
 
@@ -57,6 +59,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSwagger()
+       .UseSwaggerUI(c =>
+       {
+           c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+       });
 
 
 app.MapControllers();
