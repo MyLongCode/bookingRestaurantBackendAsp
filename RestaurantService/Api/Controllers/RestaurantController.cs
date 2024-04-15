@@ -25,7 +25,10 @@ namespace Api.Controllers
             _menuLogicManager = menuLogicManager;
             _categoryLogicManager = categoryLogicManager;
         }
-
+        /// <summary>
+        /// Получить все рестораны
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("/restaurant")]
         public IActionResult GetAllRestaurants()

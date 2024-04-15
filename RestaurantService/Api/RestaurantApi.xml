@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api</name>
+    </assembly>
+    <members>
+        <member name="M:Api.Controllers.RestaurantController.GetAllRestaurants">
+            <summary>
+            Получить все рестораны
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

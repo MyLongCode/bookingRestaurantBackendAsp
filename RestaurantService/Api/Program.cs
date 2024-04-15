@@ -23,6 +23,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.TryAddLogic();
 builder.Services.TryAddDal();
 
+builder.Services.AddSwaggerGen(options =>
+{
+    var basePath = AppContext.BaseDirectory;
+
+    var xmlPath = Path.Combine(basePath, "RestaurantApi.xml");
+    options.IncludeXmlComments(xmlPath);
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
