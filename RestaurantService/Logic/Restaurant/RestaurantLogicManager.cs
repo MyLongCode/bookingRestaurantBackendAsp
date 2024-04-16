@@ -22,7 +22,7 @@ namespace Logic.Restaurant
             {
                 Name = restaurant.Name,
                 Address = restaurant.Address,
-                OwnerId = restaurant.OwnerId,
+                UserId = restaurant.OwnerId,
                 Description = restaurant.Description,
                 Schedule = restaurant.Schedule,
                 CapacityOnTable = restaurant.CapacityOnTable,
@@ -43,7 +43,7 @@ namespace Logic.Restaurant
             {
                 Name = a.Name,
                 Address = a.Address,
-                OwnerId = a.OwnerId,
+                OwnerId = a.UserId,
                 Description = a.Description,
                 Schedule = a.Schedule,
                 CapacityOnTable = a.CapacityOnTable,
@@ -59,7 +59,7 @@ namespace Logic.Restaurant
             {
                 Name = restaurantDal.Name,
                 Address=restaurantDal.Address,
-                OwnerId=restaurantDal.OwnerId,
+                OwnerId=restaurantDal.UserId,
                 Description=restaurantDal.Description,
                 Schedule=restaurantDal.Schedule,
                 CapacityOnTable=restaurantDal.CapacityOnTable,

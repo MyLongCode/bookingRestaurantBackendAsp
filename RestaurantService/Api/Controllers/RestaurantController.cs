@@ -34,6 +34,7 @@ namespace Api.Controllers
         [Route("/restaurant")]
         public IActionResult GetAllRestaurants([FromQuery] int page=1)
         {
+            if (page <= 0) page = 1;
             var restaurants = _restaurantLogicManager.GetAllRestaurants(page);
             return Ok(restaurants);
         }
@@ -69,7 +70,7 @@ namespace Api.Controllers
                 }).ToArray(),
             });
         }
-
+        [Authorize]
         [HttpPost]
         [Route("/restaurant")]
         public IActionResult CreateRestaurant(CreateRestaurantRequest dto)

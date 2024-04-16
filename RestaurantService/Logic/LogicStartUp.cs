@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Logic.Category;
 using Logic.Category.Interfaces;
+using Logic.User;
+using Logic.User.Interfaces;
 
 namespace Logic
 {
@@ -16,6 +18,8 @@ namespace Logic
             serviceCollection.TryAddScoped<IRestaurantLogicManager, RestaurantLogicManager>();
             serviceCollection.TryAddScoped<IMenuLogicManager, MenuLogicManager>();
             serviceCollection.TryAddScoped<ICategoryLogicManager, CategoryLogicManager>();
+            serviceCollection.TryAddScoped<IUserLogicManager, UserLogicManager>();
+
             return serviceCollection;
         }
     }

@@ -8,6 +8,7 @@ using NuGet.Protocol.Core.Types;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Api.Models;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,29 @@ builder.Services.AddSwaggerGen(options =>
 
     var xmlPath = Path.Combine(basePath, "RestaurantApi.xml");
     options.IncludeXmlComments(xmlPath);
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"Введите JWT токен авторизации.",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+{
+    {
+      new OpenApiSecurityScheme
+      {
+        Reference = new OpenApiReference
+        {
+            Type = ReferenceType.SecurityScheme,
+            Id = "Bearer"
+        },
+      },
+      new List<string>()
+    }
+});
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

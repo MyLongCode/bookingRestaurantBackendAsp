@@ -4,6 +4,8 @@ using Dal.Menu;
 using Dal.Menu.Interfaces;
 using Dal.Restaurant;
 using Dal.Restaurant.Interfaces;
+using Dal.User;
+using Dal.User.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -16,6 +18,7 @@ namespace Logic
             serviceCollection.TryAddScoped<IRestaurantRepository, RestaurantRepository>();
             serviceCollection.TryAddScoped<IMenuRepository, MenuRepository>();
             serviceCollection.TryAddScoped<ICategoryRepository, CategoryRepository>();
+            serviceCollection.TryAddScoped<IUserRepository, UserRepository>();
             return serviceCollection;
         }
     }
