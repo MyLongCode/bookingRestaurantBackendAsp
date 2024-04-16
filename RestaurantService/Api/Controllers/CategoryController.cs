@@ -5,6 +5,7 @@ using Logic.Category.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.IO;
 
 namespace Api.Controllers
@@ -33,10 +34,23 @@ namespace Api.Controllers
         {
             string path = "";
             IFormFile image = dto.Photo;
+            SaveImage(image);
+
+            await _categoryLogicManager.CreateCategory(new CategoryLogic
+            {
+                Name = dto.Name,
+                Photo = image.FileName,
+                MenuId = dto.MenuId,
+
+            });
+            return Ok("пацаны бэк 500 вернул");
+        }
+        private async void SaveImage(IFormFile image)
+        {
             if (image != null)
             {
                 // путь к папке Files
-                path = image.FileName;
+                string path = image.FileName;
                 // сохраняем файл в папку Files в каталоге wwwroot
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + "/Files/" + path, FileMode.Create))
                 {
@@ -44,14 +58,7 @@ namespace Api.Controllers
                 }
 
             }
-            await _categoryLogicManager.CreateCategory(new CategoryLogic
-            {
-                Name = dto.Name,
-                Photo = path,
-                MenuId = dto.MenuId,
-
-            });
-            return Ok("пацаны бэк 500 вернул");
         }
+
     }
 }
