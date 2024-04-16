@@ -4,6 +4,13 @@
         <name>Api</name>
     </assembly>
     <members>
+        <member name="M:Api.Controllers.CategoryController.CreateCategory(Api.Controllers.Category.Requests.CreateCategoryRequest)">
+            <summary>
+            Создать новую категорию
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="M:Api.Controllers.RestaurantController.GetAllRestaurants">
             <summary>
             Получить все рестораны

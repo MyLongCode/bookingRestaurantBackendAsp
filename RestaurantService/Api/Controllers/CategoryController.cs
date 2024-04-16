@@ -1,7 +1,11 @@
 ﻿using Api.Controllers.Category.Requests;
+using Dal.EF;
 using Logic.Category.Interfaces;
 using Logic.Category.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace Api.Controllers
 {
@@ -9,22 +13,43 @@ namespace Api.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryLogicManager _categoryLogicManager;
+        IWebHostEnvironment _appEnvironment;
 
-        public CategoryController(ICategoryLogicManager categoryLogicManager)
+        public CategoryController(ICategoryLogicManager categoryLogicManager, IWebHostEnvironment appEnvironment)
         {
             _categoryLogicManager = categoryLogicManager;
+            _appEnvironment = appEnvironment;
         }
 
+
+        /// <summary>
+        /// Создать новую категорию
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("/category")]
-        public IActionResult CreateCategory(CreateCategoryRequest dto)
+        public async Task<IActionResult> CreateCategory(CreateCategoryRequest dto)
         {
-            _categoryLogicManager.CreateCategory(new CategoryLogic
+            string path = "";
+            IFormFile image = dto.Photo;
+            if (image != null)
+            {
+                // путь к папке Files
+                path = image.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + "/Files/" + path, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
+
+            }
+            await _categoryLogicManager.CreateCategory(new CategoryLogic
             {
                 Name = dto.Name,
-                Photo = dto.Photo,
+                Photo = path,
                 MenuId = dto.MenuId,
-                
+
             });
             return Ok("пацаны бэк 500 вернул");
         }

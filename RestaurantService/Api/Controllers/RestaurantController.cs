@@ -8,6 +8,7 @@ using Logic.Restaurant.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
+using System.Net;
 
 namespace Api.Controllers
 {
@@ -44,6 +45,7 @@ namespace Api.Controllers
         {
             var restaurant = await _restaurantLogicManager.GetRestaurantInfo(id);
             var menus = await _menuLogicManager.GetAllMenusByRestaurantId(id);
+
             return Ok(new GetRestaurantResponse
             {
                 Name = restaurant.Name,

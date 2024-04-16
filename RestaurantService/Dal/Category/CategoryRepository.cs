@@ -17,6 +17,7 @@ namespace Dal.Category
 
         public async Task CreateCategory(CategoryDal category)
         {
+
             db.Add(category);
             db.SaveChanges();
         }
