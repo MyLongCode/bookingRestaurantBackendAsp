@@ -32,9 +32,9 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/restaurant")]
-        public IActionResult GetAllRestaurants()
+        public IActionResult GetAllRestaurants([FromQuery] int page=1)
         {
-            var restaurants = _restaurantLogicManager.GetAllRestaurants();
+            var restaurants = _restaurantLogicManager.GetAllRestaurants(page);
             return Ok(restaurants);
         }
 
@@ -86,7 +86,6 @@ namespace Api.Controllers
                 Preview = dto.Preview
             });
             return Ok(res);
-
         }
         
     }

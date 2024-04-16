@@ -32,9 +32,10 @@ namespace Dal.Restaurant
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<RestaurantDal>> GetAllRestaurants()
+        public async Task<IEnumerable<RestaurantDal>> GetAllRestaurants(int page)
         {
-            return db.Restaurants.ToList();
+            int pageSize = 10;
+            return db.Restaurants.Skip((page - 1)*pageSize).Take(pageSize).ToList();
         }
 
         public Task<RestaurantDal> GetRestaurantInfo(int restaurantId)

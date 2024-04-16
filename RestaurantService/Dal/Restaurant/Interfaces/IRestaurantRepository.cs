@@ -16,7 +16,7 @@ namespace Dal.Restaurant.Interfaces
         /// Получить все рестораны
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<RestaurantDal>> GetAllRestaurants();
+        Task<IEnumerable<RestaurantDal>> GetAllRestaurants(int page);
         /// <summary>
         /// Создание нового ресторана
         /// </summary>

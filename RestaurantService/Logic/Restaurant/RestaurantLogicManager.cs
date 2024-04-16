@@ -36,9 +36,9 @@ namespace Logic.Restaurant
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<RestaurantLogic>> GetAllRestaurants()
+        public async Task<IEnumerable<RestaurantLogic>> GetAllRestaurants(int page)
         {
-            var result = await _restaurantRepository.GetAllRestaurants();
+            var result = await _restaurantRepository.GetAllRestaurants(page);
             return result.Select(a => new RestaurantLogic()
             {
                 Name = a.Name,

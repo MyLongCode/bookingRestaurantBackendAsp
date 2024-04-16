@@ -56,9 +56,7 @@ namespace Api.Controllers
                 {
                     await image.CopyToAsync(fileStream);
                 }
-
             }
         }
-
     }
 }

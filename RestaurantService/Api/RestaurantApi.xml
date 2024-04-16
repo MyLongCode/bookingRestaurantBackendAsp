@@ -11,7 +11,7 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.RestaurantController.GetAllRestaurants">
+        <member name="M:Api.Controllers.RestaurantController.GetAllRestaurants(System.Int32)">
             <summary>
             Получить все рестораны
             </summary>
