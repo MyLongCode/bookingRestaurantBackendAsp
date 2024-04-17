@@ -1,4 +1,5 @@
 ﻿using Dal.Base;
+using Dal.Booking.Models;
 using Dal.User.Models;
 using System;
 using System.Collections.Generic;

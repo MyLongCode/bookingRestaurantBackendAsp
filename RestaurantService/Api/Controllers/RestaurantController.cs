@@ -1,7 +1,10 @@
-﻿using Api.Controllers.Restaurant.Requests;
+﻿using Api.Controllers.Booking.Requests;
+using Api.Controllers.Restaurant.Requests;
 using Api.Controllers.Restaurant.Responses;
 using Api.Models;
 using Humanizer;
+using Logic.Booking.Interfaces;
+using Logic.Booking.Models;
 using Logic.Category.Interfaces;
 using Logic.Menu.Interfaces;
 using Logic.Restaurant.Interfaces;
@@ -22,14 +25,17 @@ namespace Api.Controllers
         private readonly IMenuLogicManager _menuLogicManager;
         private readonly ICategoryLogicManager _categoryLogicManager;
         private readonly IUserLogicManager _userLogicManager;
+        private IBookingLogicManager _bookingLogicManager;
 
         public RestaurantController(IRestaurantLogicManager restaurantLogicManager,
-            IMenuLogicManager menuLogicManager, ICategoryLogicManager categoryLogicManager, IUserLogicManager userLogicManager)
+            IMenuLogicManager menuLogicManager, ICategoryLogicManager categoryLogicManager, IUserLogicManager userLogicManager,
+            IBookingLogicManager bookingLogicManager)
         {
             _restaurantLogicManager = restaurantLogicManager;
             _menuLogicManager = menuLogicManager;
             _categoryLogicManager = categoryLogicManager;
             _userLogicManager = userLogicManager;
+            _bookingLogicManager = bookingLogicManager;
         }
         /// <summary>
         /// Получить все рестораны
@@ -93,6 +99,25 @@ namespace Api.Controllers
             });
             return Ok(res);
         }
-        
+
+        [Authorize]
+        [HttpPost]
+        [Route("/restaurant/{id}/booking")]
+        public IActionResult CreateBooking(CreateBookingRequest dto, int id)
+        {
+            var userId = _userLogicManager.GetIdByUsername(User.Identity.Name).Result;
+            var res = _bookingLogicManager.CreateBooking(new BookingLogic
+            {
+                PhoneNumber = dto.PhoneNumber,
+                TableNumber = 0,
+                Date = dto.Date,
+                Status = "Ожидается",
+                CountPeople = dto.CountPeople,
+                Wishes = dto.Wishes,
+                UserId = userId,
+                RestaurantId = id
+            });
+            return Ok(res);
+        }
     }
 }

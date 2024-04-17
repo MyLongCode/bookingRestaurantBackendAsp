@@ -34,5 +34,18 @@ namespace Dal.EF
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BookingDal>()
+                .HasOne(e => e.Restaurant)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict); // <--
+
+            modelBuilder.Entity<BookingDal>()
+                .HasOne(e => e.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

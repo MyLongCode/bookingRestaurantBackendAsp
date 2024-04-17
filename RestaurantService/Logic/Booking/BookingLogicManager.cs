@@ -47,8 +47,8 @@ namespace Logic.Booking
                 Status = booking.Status,
                 CountPeople = booking.CountPeople,
                 Wishes = booking.Wishes,
-                UserId = booking.UserId,
-                RestaurantId = booking.RestaurantId
+                UserId = (int)booking.UserId,
+                RestaurantId = (int)booking.RestaurantId
             }).ToArray();
         }
 
@@ -62,8 +62,8 @@ namespace Logic.Booking
                 Status = booking.Status,
                 CountPeople = booking.CountPeople,
                 Wishes = booking.Wishes,
-                UserId = booking.UserId,
-                RestaurantId = booking.RestaurantId
+                UserId = (int)booking.UserId,
+                RestaurantId = (int)booking.RestaurantId
             }).ToArray();
         }
     }

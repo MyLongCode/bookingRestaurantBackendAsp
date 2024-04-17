@@ -1,4 +1,6 @@
-﻿using Dal.Category;
+﻿using Dal.Booking;
+using Dal.Booking.Interfaces;
+using Dal.Category;
 using Dal.Category.Interfaces;
 using Dal.Menu;
 using Dal.Menu.Interfaces;
@@ -19,6 +21,7 @@ namespace Logic
             serviceCollection.TryAddScoped<IMenuRepository, MenuRepository>();
             serviceCollection.TryAddScoped<ICategoryRepository, CategoryRepository>();
             serviceCollection.TryAddScoped<IUserRepository, UserRepository>();
+            serviceCollection.TryAddScoped<IBookingRepository, BookingRepository>();
             return serviceCollection;
         }
     }
