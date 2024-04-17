@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Booking\Interfaces\" />
     <Folder Include="DishItem\Interfaces\" />
     <Folder Include="Photo\Interfaces\" />
     <Folder Include="Restaurant\Interfaces\" />
