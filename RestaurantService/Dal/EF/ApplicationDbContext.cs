@@ -14,6 +14,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Dal.Booking.Models;
 
 namespace Dal.EF
 {
@@ -26,11 +27,25 @@ namespace Dal.EF
         public DbSet<PhotoDal> Photos { get; set; }
         public DbSet<UserDal> Users { get; set; }
         public DbSet<RoleDal> Roles { get; set; }
+        public DbSet<BookingDal> Bookings { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
             Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BookingDal>()
+                .HasOne(e => e.Restaurant)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict); // <--
+
+            modelBuilder.Entity<BookingDal>()
+                .HasOne(e => e.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

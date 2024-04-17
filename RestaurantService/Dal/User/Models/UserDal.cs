@@ -1,4 +1,6 @@
-﻿using Dal.Role.Models;
+﻿using Dal.Booking.Models;
+using Dal.Restaurant.Models;
+using Dal.Role.Models;
 
 namespace Dal.User.Models
 {
@@ -13,5 +15,6 @@ namespace Dal.User.Models
         public string Avatar { get; set; }
         public int RoleId { get; set; }
         public RoleDal Role { get; set; }
+
     }
 }

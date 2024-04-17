@@ -8,6 +8,8 @@ using Logic.Category;
 using Logic.Category.Interfaces;
 using Logic.User;
 using Logic.User.Interfaces;
+using Logic.Booking.Interfaces;
+using Logic.Booking;
 
 namespace Logic
 {
@@ -19,6 +21,7 @@ namespace Logic
             serviceCollection.TryAddScoped<IMenuLogicManager, MenuLogicManager>();
             serviceCollection.TryAddScoped<ICategoryLogicManager, CategoryLogicManager>();
             serviceCollection.TryAddScoped<IUserLogicManager, UserLogicManager>();
+            serviceCollection.TryAddScoped<IBookingLogicManager, BookingLogicManager>();
 
             return serviceCollection;
         }
