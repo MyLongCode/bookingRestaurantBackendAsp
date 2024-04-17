@@ -36,9 +36,16 @@ namespace Logic.Restaurant
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<RestaurantLogic>> GetAllRestaurants(int page)
+        public async Task<IEnumerable<RestaurantLogic>> GetAllRestaurants(int page, Sort sort)
         {
             var result = await _restaurantRepository.GetAllRestaurants(page);
+            result = sort switch
+            {
+                Sort.NameAsc => result.OrderBy(r => r.Name),
+                Sort.NameDesc => result.OrderByDescending(r => r.Name),
+                Sort.IdAsc => result.OrderBy(r => r.Id),
+                Sort.IdDesc => result.OrderByDescending(r => r.Id),
+            };
             return result.Select(a => new RestaurantLogic()
             {
                 Name = a.Name,

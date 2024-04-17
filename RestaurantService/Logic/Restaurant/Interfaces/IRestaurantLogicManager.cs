@@ -8,7 +8,7 @@ namespace Logic.Restaurant.Interfaces
         /// Получить все рестораны
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<RestaurantLogic>> GetAllRestaurants(int page);
+        Task<IEnumerable<RestaurantLogic>> GetAllRestaurants(int page, Sort sort);
         /// <summary>
         /// Создание нового ресторана
         /// </summary>

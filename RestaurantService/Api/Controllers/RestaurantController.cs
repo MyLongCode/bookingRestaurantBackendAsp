@@ -1,5 +1,6 @@
 ﻿using Api.Controllers.Restaurant.Requests;
 using Api.Controllers.Restaurant.Responses;
+using Api.Models;
 using Humanizer;
 using Logic.Category.Interfaces;
 using Logic.Menu.Interfaces;
@@ -36,13 +37,12 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/restaurant")]
-        public IActionResult GetAllRestaurants([FromQuery] int page=1)
+        public IActionResult GetAllRestaurants([FromQuery] int page=1, Sort sort=Sort.IdAsc)
         {
             if (page <= 0) page = 1;
-            var restaurants = _restaurantLogicManager.GetAllRestaurants(page);
+            var restaurants = _restaurantLogicManager.GetAllRestaurants(page, sort);
             return Ok(restaurants);
         }
-
         [HttpGet]
         [Route("/restaurant/{id}")]
         [ProducesResponseType(typeof(GetRestaurantResponse), 200)]
