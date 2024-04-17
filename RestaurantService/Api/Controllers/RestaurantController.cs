@@ -5,10 +5,12 @@ using Logic.Category.Interfaces;
 using Logic.Menu.Interfaces;
 using Logic.Restaurant.Interfaces;
 using Logic.Restaurant.Models;
+using Logic.User.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 using System.Net;
+using System.Security.Claims;
 
 namespace Api.Controllers
 {
@@ -18,13 +20,15 @@ namespace Api.Controllers
         private readonly IRestaurantLogicManager _restaurantLogicManager;
         private readonly IMenuLogicManager _menuLogicManager;
         private readonly ICategoryLogicManager _categoryLogicManager;
+        private readonly IUserLogicManager _userLogicManager;
 
         public RestaurantController(IRestaurantLogicManager restaurantLogicManager,
-            IMenuLogicManager menuLogicManager, ICategoryLogicManager categoryLogicManager)
+            IMenuLogicManager menuLogicManager, ICategoryLogicManager categoryLogicManager, IUserLogicManager userLogicManager)
         {
             _restaurantLogicManager = restaurantLogicManager;
             _menuLogicManager = menuLogicManager;
             _categoryLogicManager = categoryLogicManager;
+            _userLogicManager = userLogicManager;
         }
         /// <summary>
         /// Получить все рестораны
@@ -75,11 +79,12 @@ namespace Api.Controllers
         [Route("/restaurant")]
         public IActionResult CreateRestaurant(CreateRestaurantRequest dto)
         {
+            var ownerId = _userLogicManager.GetIdByUsername(User.Identity.Name).Result;
             var res = _restaurantLogicManager.CreateRestaurant(new RestaurantLogic
             {
                 Name = dto.Name,
                 Address = dto.Address,
-                OwnerId = dto.OwnerId,
+                OwnerId = ownerId,
                 Description = dto.Description,
                 Schedule = dto.Schedule,
                 CapacityOnTable = dto.CapacityOnTable,

@@ -13,6 +13,7 @@ namespace Dal.User.Interfaces
         public Task<IEnumerable<UserDal>> GetAllUsers();
         public Task<bool> CheckUserPassword(string username, string password);
         public Task<UserDal> GetUserById(int id);
+        public Task<int> GetIdByName(string username);
 
     }
 }

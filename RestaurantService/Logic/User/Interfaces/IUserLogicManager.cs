@@ -13,5 +13,6 @@ namespace Logic.User.Interfaces
         public Task<IEnumerable<UserLogic>> GetAllUsers();
         public Task<bool> CheckUserPassword(string username, string password);
         public Task<UserLogic> GetUserById(int id);
+        public Task<int> GetIdByUsername(string username);
     }
 }

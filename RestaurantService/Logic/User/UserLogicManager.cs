@@ -52,5 +52,10 @@ namespace Logic.User
                 Avatar = user.Avatar
             };
         }
+
+        public Task<int> GetIdByUsername(string username)
+        {
+            return _userRepository.GetIdByName(username);
+        }
     }
 }

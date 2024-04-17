@@ -26,6 +26,11 @@ namespace Dal.User
             return db.Users.ToList();
         }
 
+        public Task<int> GetIdByName(string username)
+        {
+            return Task.FromResult(db.Users.FirstOrDefault(u => u.Email == username).Id);
+        }
+
         public Task<UserDal> GetUserById(int id)
         {
             UserDal? user = db.Users.FirstOrDefault(x => x.Id == id);
