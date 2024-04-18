@@ -57,5 +57,18 @@ namespace Logic.User
         {
             return _userRepository.GetIdByName(username);
         }
+
+        public Task<int> CreateUser(UserLogic user)
+        {
+            return _userRepository.CreateUser(new UserDal
+            {
+                Email = user.Email,
+                Password = user.Password,
+                FullName = user.FullName,
+                BirthDate = user.BirthDate,
+                PhoneNumber = user.PhoneNumber,
+                Avatar = user.Avatar
+            });
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Dal.User.Interfaces
         public Task<bool> CheckUserPassword(string username, string password);
         public Task<UserDal> GetUserById(int id);
         public Task<int> GetIdByName(string username);
+        public Task<int> CreateUser(UserDal userDal);
 
     }
 }

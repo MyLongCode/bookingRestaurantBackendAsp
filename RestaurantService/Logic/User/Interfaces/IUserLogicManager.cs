@@ -14,5 +14,6 @@ namespace Logic.User.Interfaces
         public Task<bool> CheckUserPassword(string username, string password);
         public Task<UserLogic> GetUserById(int id);
         public Task<int> GetIdByUsername(string username);
+        public Task<int> CreateUser(UserLogic user);
     }
 }

@@ -21,6 +21,16 @@ namespace Dal.User
             return Task.FromResult(!(user == null));
         }
 
+        public async Task<int> CreateUser(UserDal userDal)
+        {
+            UserDal? user = db.Users.FirstOrDefault(x => x.Email == userDal.Email);
+            if (user != null) return -1;
+            db.Users.Add(userDal);
+            db.SaveChanges();
+            int userId = db.Users.FirstOrDefault(x => x.Email == userDal.Email).Id;
+            return userId;
+        }
+
         public async Task<IEnumerable<UserDal>> GetAllUsers()
         {
             return db.Users.ToList();
@@ -35,7 +45,7 @@ namespace Dal.User
         {
             UserDal? user = db.Users.FirstOrDefault(x => x.Id == id);
             if (user == null)
-                throw new Exception("user is not found");
+                throw new Exception("userDal is not found");
             return Task.FromResult(user);
         }
     }

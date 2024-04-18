@@ -55,9 +55,16 @@ namespace Api.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [Route("/register")]
+        public IActionResult RegisterUser()
+        {
+
+        }
+
         private ClaimsIdentity GetIdentity(string username, string password)
         {
-            if (_userLogicManager.CheckUserPassword(username, password) != null)
+            if (_userLogicManager.CheckUserPassword(username, password).Result != false)
             {
                 var claims = new List<Claim>
                 {
