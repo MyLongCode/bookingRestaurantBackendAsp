@@ -67,7 +67,8 @@ namespace Logic.User
                 FullName = user.FullName,
                 BirthDate = user.BirthDate,
                 PhoneNumber = user.PhoneNumber,
-                Avatar = user.Avatar
+                Avatar = user.Avatar,
+                RoleId = user.RoleId
             });
         }
     }

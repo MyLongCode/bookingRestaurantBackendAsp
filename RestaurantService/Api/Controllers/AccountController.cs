@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.Controllers.User.Requests;
+using Api.Models;
 using Dal.EF;
 using Dal.User.Models;
 using Logic.Category.Interfaces;
@@ -10,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -57,9 +59,20 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("/register")]
-        public IActionResult RegisterUser()
+        public IActionResult RegisterUser(UserRegisterRequest dto)
         {
-
+            var userId = _userLogicManager.CreateUser(new UserLogic
+            {
+                Email = dto.Email,
+                Password = dto.Password,
+                FullName = dto.FullName,
+                BirthDate = dto.BirthDate,
+                PhoneNumber = dto.PhoneNumber,
+                Avatar = dto.Avatar,
+                RoleId = 1
+            }).Result;
+            if (userId == -1) return BadRequest("User is not registration");
+            return Ok(userId);
         }
 
         private ClaimsIdentity GetIdentity(string username, string password)
