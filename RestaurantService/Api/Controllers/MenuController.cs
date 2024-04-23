@@ -24,7 +24,7 @@ namespace Api.Controllers
                 Name = dto.Name,
                 RestaurantId = dto.RestaurantId,
             });
-            return Ok("пацаны бэк 500 вернул");
+            return Ok();
         }
     }
 }

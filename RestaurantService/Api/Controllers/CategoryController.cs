@@ -43,7 +43,7 @@ namespace Api.Controllers
                 MenuId = dto.MenuId,
 
             });
-            return Ok("пацаны бэк 500 вернул");
+            return Ok();
         }
         private async void SaveImage(IFormFile image)
         {

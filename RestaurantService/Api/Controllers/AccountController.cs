@@ -30,9 +30,9 @@ namespace Api.Controllers
         }
 
         [HttpPost("/token")]
-        public IActionResult Token(string username, string password)
+        public IActionResult Token(GetUserTokenRequest dto)
         {
-            var identity = GetIdentity(username, password);
+            var identity = GetIdentity(dto.Username, dto.Username);
             if (identity == null)
             {
                 return BadRequest(new { errorText = "Invalid username or password." });
