@@ -1,22 +1,11 @@
 ﻿using Api.Controllers.User.Requests;
 using Api.Models;
-using Dal.EF;
-using Dal.User.Models;
-using Logic.Category.Interfaces;
 using Logic.User.Interfaces;
 using Logic.User.Models;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Api.Controllers
 {
